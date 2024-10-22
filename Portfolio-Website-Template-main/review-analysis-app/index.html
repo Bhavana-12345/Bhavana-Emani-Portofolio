@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Analysis App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Review Analysis Dashboard
+            <label for="themeSwitch" title="Toggle Dark Theme" class="theme-toggle">
+                <img id="themeSwitch" src="night-mode.gif" alt="Toggle Dark Theme" />
+            </label>
+        </h1>
+        <div class="input-group">
+            <input type="file" id="fileInput" accept=".txt" />
+            <button id="analyzeBtn">Analyze</button>
+        </div>
+
+        <div id="results" class="hidden">
+            <h2>Analysis Results</h2>
+            <p id="positivePercent"></p>
+            <p id="negativePercent"></p>
+            <div class="charts">
+                <canvas id="pieChartCanvas"></canvas>
+                <canvas id="barChartCanvas"></canvas>
+            </div>
+            <h3>Common Service-Related Words</h3>
+            <ul id="commonWordsList"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

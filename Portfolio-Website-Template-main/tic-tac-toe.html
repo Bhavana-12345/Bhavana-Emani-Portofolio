@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        /* Styling for Tic-Tac-Toe */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #game-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 2rem;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+
+        h2{
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            text-decoration-color: red;
+            text-decoration-thickness: 2px;
+            text-decoration-style: solid;
+        }
+        #username{
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 20px;
+
+        }
+        .btn {
+            text-decoration: none;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        #name-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        button{
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            background-color: #060606;
+        }
+
+        #welcome-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: blue;
+        }
+        #result {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <!-- Username input form -->
+    <div id="name-container">
+        <h2>Enter your name to start:</h2>
+        <input type="text" id="username" placeholder="Your name">
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Tic-Tac-Toe Game Board -->
+    <div id="game-container">
+        <h2 id="welcome-message"></h2>
+        <table>
+            <tr>
+                <td onclick="makeMove(0,0)" id="cell-0-0"></td>
+                <td onclick="makeMove(0,1)" id="cell-0-1"></td>
+                <td onclick="makeMove(0,2)" id="cell-0-2"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(1,0)" id="cell-1-0"></td>
+                <td onclick="makeMove(1,1)" id="cell-1-1"></td>
+                <td onclick="makeMove(1,2)" id="cell-1-2"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(2,0)" id="cell-2-0"></td>
+                <td onclick="makeMove(2,1)" id="cell-2-1"></td>
+                <td onclick="makeMove(2,2)" id="cell-2-2"></td>
+            </tr>
+        </table>
+        <p id="result"></p>
+        <button onclick="resetGame()">Restart Game</button>
+        <a class="btn" href="index.html">Back to Home</a>
+    </div>
+
+    <script>
+        let board = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+        let currentPlayer = "X";
+        let gameActive = true;
+        let userName = "";
+
+        function startGame() {
+            const input = document.getElementById('username').value;
+            if (input === "") {
+                alert("Please enter your name.");
+                return;
+            }
+            userName = input;
+            document.getElementById('welcome-message').innerText = `Welcome, ${userName}!`;
+            document.getElementById('name-container').style.display = 'none';
+            document.getElementById('game-container').style.display = 'flex';
+        }
+
+        function makeMove(row, col) {
+            if (!gameActive || board[row][col] !== "") return;
+
+            // Player move
+            board[row][col] = currentPlayer;
+            document.getElementById(`cell-${row}-${col}`).innerText = currentPlayer;
+
+            if (checkWin()) {
+                document.getElementById('result').innerText = `${userName} wins!`;
+                gameActive = false;
+                return;
+            } else if (checkDraw()) {
+                document.getElementById('result').innerText = "It's a draw!";
+                gameActive = false;
+                return;
+            }
+
+            // Switch to computer's move
+            currentPlayer = "O";
+            setTimeout(computerMove, 500);
+        }
+
+        function computerMove() {
+            if (!gameActive) return;
+
+            // Call the minimax algorithm to determine the best move for the computer
+            const bestMove = getBestMove();
+            if (bestMove) {
+                const [row, col] = bestMove;
+                board[row][col] = currentPlayer;
+                document.getElementById(`cell-${row}-${col}`).innerText = currentPlayer;
+            }
+
+            if (checkWin()) {
+                document.getElementById('result').innerText = `Computer wins!`;
+                gameActive = false;
+            } else if (checkDraw()) {
+                document.getElementById('result').innerText = "It's a draw!";
+                gameActive = false;
+            }
+
+            // Switch back to player's move
+            currentPlayer = "X";
+        }
+
+        function getBestMove() {
+            let bestScore = -Infinity;
+            let move;
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (board[i][j] === "") {
+                        board[i][j] = "O"; // Computer's turn
+                        let score = minimax(board, 0, false);
+                        board[i][j] = ""; // Undo the move
+                        if (score > bestScore) {
+                            bestScore = score;
+                            move = [i, j];
+                        }
+                    }
+                }
+            }
+            return move;
+        }
+
+        function minimax(board, depth, isMaximizing) {
+            const scores = {
+                X: -1,  // Player (human)
+                O: 1,   // Computer
+                tie: 0
+            };
+
+            let winner = checkWinner();
+            if (winner) return scores[winner];
+
+            if (isMaximizing) {
+                let bestScore = -Infinity;
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if (board[i][j] === "") {
+                            board[i][j] = "O";
+                            let score = minimax(board, depth + 1, false);
+                            board[i][j] = "";
+                            bestScore = Math.max(score, bestScore);
+                        }
+                    }
+                }
+                return bestScore;
+            } else {
+                let bestScore = Infinity;
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if (board[i][j] === "") {
+                            board[i][j] = "X";
+                            let score = minimax(board, depth + 1, true);
+                            board[i][j] = "";
+                            bestScore = Math.min(score, bestScore);
+                        }
+                    }
+                }
+                return bestScore;
+            }
+        }
+
+        function checkWinner() {
+            for (let i = 0; i < 3; i++) {
+                if (board[i][0] === board[i][1] && board[i][1] === board[i][2] && board[i][0] !== "") {
+                    return board[i][0];
+                }
+                if (board[0][i] === board[1][i] && board[1][i] === board[2][i] && board[0][i] !== "") {
+                    return board[0][i];
+                }
+            }
+            if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[0][0] !== "") {
+                return board[0][0];
+            }
+            if (board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[0][2] !== "") {
+                return board[0][2];
+            }
+            if (checkDraw()) return "tie";
+            return null;
+        }
+
+        function checkWin() {
+            return checkWinner() === currentPlayer;
+        }
+
+        function checkDraw() {
+            return board.flat().every(cell => cell !== "");
+        }
+
+        function resetGame() {
+            board = [
+                ["", "", ""],
+                ["", "", ""],
+                ["", "", ""]
+            ];
+            currentPlayer = "X";
+            gameActive = true;
+            document.querySelectorAll("td").forEach(cell => cell.innerText = "");
+            document.getElementById('result').innerText = "";
+        }
+
+        function goBack() {
+            document.getElementById('name-container').style.display = 'block';
+            document.getElementById('game-container').style.display = 'none';
+            resetGame();
+        }
+    </script>
+</body>
+</html>
