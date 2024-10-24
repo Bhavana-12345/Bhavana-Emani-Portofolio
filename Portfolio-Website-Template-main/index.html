@@ -29,6 +29,56 @@
 /*======================================
 //--//-->   ABOUT
 ======================================*/
+.button-1 {
+  display: inline-block;
+  background-color: #ffbd39;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #000000;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color, 15%);
+    transition: all .3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #000000;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
+.container-1 {
+  padding-top: 50px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
 
 .about-mf .box-shadow-full {
   padding-top: 4rem;
@@ -130,6 +180,7 @@
 	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
 	          <li class="nav-item"><a href="#Experience-section" class="nav-link"><span>Experience</span></a></li>
 	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
+			  <li class="nav-item"><a href="#blog-section" target="_blank" class="nav-link"><span>Blog</span></a></li>
 	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 	        </ul>
 	      </div>
@@ -190,8 +241,8 @@
 			            <h2>A Windows Server Administrator</h2>
 						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
 						<!-- <br> -->
-			            <p><a href="index.html" class="btn btn-primary py-3 px-4">YouTube</a> 
-							<a href="index.html" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
+			            <p><a href="#contact" class="btn btn-primary py-3 px-4">Contact</a> 
+							<a href="#project-section" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
 		            </div>
 		          </div>
 	        	</div>
@@ -468,6 +519,57 @@
 		 </div>
 	  </div> -->
     </section>
+<!-- Blog section -->
+<section class="ftco-section" id="blog-section">
+	<div class="container">
+	  <div class="row justify-content-center mb-5 pb-5">
+		<div class="col-md-7 heading-section text-center ftco-animate">
+		  <h1 class="big big-2">Blog</h1>
+		  <h2 class="mb-4">Blog</h2>
+		  <p>Below are the Blogs that i have written.</p>
+		</div>
+	  </div>
+	  <div class="row d-flex">
+		<div class="col-md-4 d-flex ftco-animate">
+			<div class="blog-entry justify-content-end">
+			<a href="https://emani-bhavana-blog.notion.site/Adapting-to-the-Current-Software-Company-Environment-A-Guide-for-Professionals-129115d4490c80a990eef1477a57b13e" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/image.jpg');">
+			</a>
+			<div class="text mt-3 float-right d-block">
+
+			  <h3 class="heading"><a href="https://emani-bhavana-blog.notion.site/Adapting-to-the-Current-Software-Company-Environment-A-Guide-for-Professionals-129115d4490c80a990eef1477a57b13e" target="_blank">Adapting to the Current Software Company Environment</a></h3>
+			  <p>This Article more focus on how to adapt to our envinorment and become socialize with people.</p>
+			</div>
+		  </div>
+		</div>
+		<div class="col-md-4 d-flex ftco-animate">
+			<div class="blog-entry justify-content-end">
+			<a href="https://emani-bhavana-blog.notion.site/The-Power-of-Positive-Thinking-129115d4490c813bb944fe55ea82d560" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/photo-1555081944-c0c2f00d06e8.jpg');"></a>
+			<div class="text mt-3 float-right d-block">
+
+			  <h3 class="heading"><a href="/Portfolio-Website-Template-main/review-analysis-app/proj-2.jpg">Power of Positive Thinking</a></h3>
+			  <p>This Artcle tells about how great impact will be in our life if we think positive.</p>
+			</div>
+		  </div>
+		  </div>
+		  <div class="col-md-4 d-flex ftco-animate">
+			<div class="blog-entry">
+			<a href="https://emani-bhavana-blog.notion.site/My-Favorite-Hobbies-How-I-Spend-My-Free-Time-129115d4490c81e384c8e77e9f75a80e" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/blog-3.jpg');">
+			</a>
+			<div class="text mt-3 float-right d-block">
+
+			  <h3 class="heading"><a href="images/blog-3.jpg">How I Spend My Free Time</a></h3>
+			  <p>This Article tells about how i spend my free time  and what are my hobbies.</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="container-1">
+		
+		  <a href="https://emani-bhavana-blog.notion.site/129115d4490c81a2b458cd8f14f3a9fb?v=129115d4490c811a9931000c91b52a9c" target="_blank" class="button-1">Read More</a>
+	   </div> 
+		
+	
+  </section>
 
 	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
       <div class="container">
@@ -514,7 +616,7 @@
 						<h2>More projects on<span> Github  </span> </h2>
 						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
 						<br>
-						<p><a href="https://github.com/rishabhnmishra" class="btn btn-primary py-3 px-5">GitHub</a></p>
+						<p><a href="https://github.com/Bhavana-12345" class="btn btn-primary py-3 px-5">GitHub</a></p>
 						</div>
 					</div>
 				</div>
@@ -583,11 +685,11 @@
 				<br>
 					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
 					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  <li class="ftco-animate"><a href="https://www.youtube.com/@RishabhMishraOfficial"><span class="icon-youtube"></span></a></li>
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/emanibhavana/"><span class="icon-linkedin"></span></a></li>  
-					  <li class="ftco-animate"><a href="https://twitter.com/rishabhnmishra"><span class="icon-twitter"></span></a></li>
-					  <li class="ftco-animate"><a href="https://twitter.com/rishabhnmishra"><span class="icon-facebook"></span></a></li>
-				      <li class="ftco-animate"><a href="https://www.instagram.com/rishabhnmishra/"><span class="icon-instagram"></span></a></li>
+					  <li class="ftco-animate"><a href="#index.html"><span class="icon-youtube"></span></a></li>
+					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/emanibhavana/" target="_blank"><span class="icon-linkedin"></span></a></li>  
+					  <li class="ftco-animate"><a href=""><span class="icon-twitter"></span></a></li>
+					  <li class="ftco-animate"><a href=""><span class="icon-facebook"></span></a></li>
+				      <li class="ftco-animate"><a href="https://www.instagram.com/pro_build0909/" target="_blank"><span class="icon-instagram"></span></a></li>
 					</ul>
 				<br>
 		   </div>
